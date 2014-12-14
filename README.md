@@ -19,3 +19,7 @@ Install Instuctions: On githubs, I had to move the matlab module into the opencv
 Website: http://www.vlfeat.org/  
 Status: Precompiled, test worked  
 Install Instructions: http://www.vlfeat.org/install-matlab.html, use run('vlfeat-0.9.19/toolbox/vl_setup') to add to path  
+
+#### Flandmard
+Website: http://cmp.felk.cvut.cz/~uricamic/flandmark/
+Status: Going to try this next, picks out corners of eyes and mouth

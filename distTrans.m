@@ -54,10 +54,10 @@ end
 
 function dists = pointsDist(points)
 	% Converts it into the k-fan space, right now using Nose and Right Eye
-    dist1 = pdist2(points(1:2), [points([3 5 7 9])' points([4 6 8 10])']); %Nose
+    dist1 = pdist2(points(1:2), [points([3 5 7 9])' points([4 6 8 10])']); % Nose
     dist2 = pdist2(points(3:4), [points([1 5 7 9])' points([2 6 8 10])']); % Mouth left
-    dist3 = pdist2(points(5:6), [points([1 3 7 9])' points([2 4 8 10])']); % Left Eye
-    dist4 = pdist2(points(7:8), [points([1 3 5 7])' points([2 4 6 8])']); % Right Eye
+    dist3 = pdist2(points(5:6), [points([1 3 7 9])' points([2 4 8 10])']); % Mouth Right
+    dist4 = pdist2(points(7:8), [points([1 3 5 9])' points([2 4 6 10])']); % Right Eye
 
     dists = [dist1 dist2 dist3 dist4];
     dists = dists/mean(dists); % dividing by mean seems to be best way to normalize
