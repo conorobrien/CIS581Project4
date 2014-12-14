@@ -9,7 +9,7 @@ end
 
 im1 = im2double(im1);
 im2 = im2double(im2);
-
+mask = logical(mask);
 image = blur(im1, im2, mask, levels);
 end
 
@@ -42,6 +42,6 @@ function blurred = blur(im1, im2, mask, levelsLeft)
         blurredTemp = blur(gaussian1, gaussian2, blurmask, levelsLeft -1);
         blurred = zeros(size(im1));
         blurred(1:2:end, 1:2:end,:) = blurredTemp;
-        blurred = imfilter(blurred, 4*kernel, 'circular') + bsxfun(@times, laplacian1,mask)  + bsxfun(@times, laplacian2,(1-mask));
+        blurred = imfilter(blurred, 4*kernel, 'circular') + bsxfun(@times, laplacian1,mask)  + bsxfun(@times, laplacian2,(~mask));
     end
 end

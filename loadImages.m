@@ -1,4 +1,4 @@
-function images = load_images(target_dir, varargin)
+function images = loadImages(target_dir, varargin)
 %LOAD_IMAGES Loads all images in a directory into a cell array
 % default image type is .jpg, can pass in alternative extensions
 

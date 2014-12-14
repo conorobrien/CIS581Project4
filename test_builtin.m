@@ -7,8 +7,10 @@ rEyeDetector = vision.CascadeObjectDetector('righteye');
 mouthDetector = vision.CascadeObjectDetector('mouth');
 noseDetector = vision.CascadeObjectDetector('nose');
 
-images = load_images('SampleSet/hard');
+images = loadImages('SampleSet/easy');
+images = images(5);
 
+% images{1} = imread('ConorOBrien.jpg');
 for i = 1:numel(images)
     I = images{i};
     
