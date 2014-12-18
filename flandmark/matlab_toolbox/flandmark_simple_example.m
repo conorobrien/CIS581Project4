@@ -26,13 +26,15 @@ for example = 1 : 100
     fname = filename(1:end-4);
     % load image and detected face bbox
     I = imread([DIR filename]);
+    
     Ibw = rgb2gray(I);
     bbox = dlmread([DIR fname '.det']);
 
     % image output
     figure(1);
+    
     imshow(I, [], 'Border', 'tight'); hold on;
-    % plotbox(bbox);
+%     plotbox(bbox);
 
     for i = 1 : size(bbox, 1)
         tic

@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/Project_simple_example.dir/simple_example.o  -o Project_simple_example  -lflandmark_static /usr/local/lib/libopencv_highgui.2.4.9.dylib 

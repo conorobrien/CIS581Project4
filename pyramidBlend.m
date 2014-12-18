@@ -15,13 +15,14 @@ end
 
 function blurred = blur(im1, im2, mask, levelsLeft)
         %% if levelsLeft == 1, go down another step
-    if levelsLeft == 1 || numel(im1) < 4
+    if levelsLeft == 1 || numel(im1) < 27
+        levelsLeft;
         blurred = bsxfun(@times, im1,mask) + bsxfun(@times, im2, ~mask);
     else
         %% blur with gaussian, subsample
         k = [1 4 6 4 1]/16;
         kernel = conv2(k, k');
-        
+
         blurmask = imfilter(mask, kernel, 'circular');
         blurmask = blurmask(1:2:end, 1:2:end);
 
@@ -38,10 +39,12 @@ function blurred = blur(im1, im2, mask, levelsLeft)
 
         gaussRecon(1:2:end, 1:2:end,:) = gaussian2;
         laplacian2 = im2 - imfilter(gaussRecon, 4*kernel, 'circular');
-
+        
         blurredTemp = blur(gaussian1, gaussian2, blurmask, levelsLeft-1);
         blurred = zeros(size(im1));
         blurred(1:2:end, 1:2:end,:) = blurredTemp;
-        blurred = imfilter(blurred, 4*kernel, 'circular') + bsxfun(@times, laplacian1,mask)  + bsxfun(@times, laplacian2,~mask);
+        
+%         figure(1);imagesc([laplacian1 bsxfun(@times,laplacian1,mask)]*255);axis image;pause
+        blurred = imfilter(blurred, 4*kernel, 'circular') + bsxfun(@times,laplacian1,mask)  + bsxfun(@times, laplacian2,(1-mask));
     end
 end

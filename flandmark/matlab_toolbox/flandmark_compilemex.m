@@ -120,13 +120,13 @@ if (ismac)
     end;
     
     % compile mexfiles
-    eval(['mex -O -largeArrayDims ./mex/flandmark_detector_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -o ../matlab_toolbox/mex/flandmark_detector']);
-    eval(['mex -O -largeArrayDims ./mex/flandmark_detector_base_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -o ../matlab_toolbox/mex/flandmark_detector_base']);
-    eval(['mex -O -largeArrayDims ./mex/flandmark_write_model_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -o ../matlab_toolbox/mex/flandmark_write_model']);
-    eval(['mex -O -largeArrayDims ./mex/flandmark_load_model_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -o ../matlab_toolbox/mex/flandmark_load_model']);
-    eval(['mex -O -largeArrayDims ./mex/lbp2sparse_mex.cpp -I../libflandmark/' libflandmark ' -o ../matlab_toolbox/mex/lbp2sparse']);
+    eval(['mex -O -largeArrayDims ./mex/flandmark_detector_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -output ../matlab_toolbox/mex/flandmark_detector']);
+    eval(['mex -O -largeArrayDims ./mex/flandmark_detector_base_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -output ../matlab_toolbox/mex/flandmark_detector_base']);
+    eval(['mex -O -largeArrayDims ./mex/flandmark_write_model_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -output ../matlab_toolbox/mex/flandmark_write_model']);
+    eval(['mex -O -largeArrayDims ./mex/flandmark_load_model_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -output ../matlab_toolbox/mex/flandmark_load_model']);
+    eval(['mex -O -largeArrayDims ./mex/lbp2sparse_mex.cpp -I../libflandmark/' libflandmark ' -output ../matlab_toolbox/mex/lbp2sparse']);
     eval(['mex -O -largeArrayDims ./mex/argmax_mex.cpp -I../libflandmark/ ' include libflandmark cvlibs ' -output ../matlab_toolbox/mex/argmax_mex']);
-    eval(['mex -O -largeArrayDims ./mex/getNormalizedFrame_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -o ../matlab_toolbox/mex/getNormalizedFrame']);
+    eval(['mex -O -largeArrayDims ./mex/getNormalizedFrame_mex.cpp -I../libflandmark/' include libflandmark cvlibs ' -output ../matlab_toolbox/mex/getNormalizedFrame']);
 
     fprintf('Compilation finished.\n');
 end;

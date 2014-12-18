@@ -1,0 +1,6 @@
+_mexFunction
+_emlrtMexFcnProperties
+_faceSwapLive
+_faceSwapLive_initialize
+_faceSwapLive_terminate
+_faceSwapLive_atexit

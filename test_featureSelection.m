@@ -1,6 +1,8 @@
-clearvars;
+clear all;
 addpath('CIS581Work');
 
+whichDistTrans = 2;
+stepThrough = 0; %0, just go though, 1, just pause at end, 2 step at every face
 %% Initialize the feature detectors
 faceDetector = vision.CascadeObjectDetector('FrontalFaceCART');
 
@@ -10,50 +12,65 @@ mouthDetector = vision.CascadeObjectDetector('mouth');
 noseDetector = vision.CascadeObjectDetector('nose');
 
 %% Load Images from folder
-images = loadImages('SampleSet/easy');
-
+folder = 'TestSet/pose';
+images = loadImages(folder);
+replacedImages = images;
 %% Load base image and mask
-baseImg = im2double(imread('ConorFace.jpg'));
-faceMask = imread('ConorFaceMask.jpg');
+baseImg = im2double(imread('ConorFaceHires.jpg'));
+faceMask = imread('ConorFaceHiresMask.jpg');
 faceMask = ~logical(faceMask(:,:,1));
 % images = images(1);
 
 for i = 1:numel(images)
     currentImage = images{i};
+    if strcmpi(folder, 'testset/more')
+        currentImage = imresize(currentImage, 3);
+    end
     
-    fprintf('Detecting faces in image %d/%d ... \n', i, numel(images));
+    fprintf('Detecting faces in image %d/%d ... ', i, numel(images));
     faceBoxes = step(faceDetector, currentImage);
     fprintf('Found %d faces \n', size(faceBoxes, 1));
         
     for j = 1:size(faceBoxes, 1)
-        
-        
-        fprintf('Detecting features in face %d/%d ... \n', j, size(faceBoxes, 1));
+
+        fprintf('\tDetecting features in face %d/%d ... ', j, size(faceBoxes, 1));
 
         xRange = (1:faceBoxes(j,4)) + faceBoxes(j,2);
         yRange = (1:faceBoxes(j,3)) + faceBoxes(j,1);
         faceImage = currentImage(xRange, yRange,:);
+        if strcmpi(folder, 'testset/more')
+            scale = 8;
+            faceImage = imresize(faceImage, scale);
+        end
         rEyeBoxes = step(rEyeDetector, faceImage);
         lEyeBoxes = step(lEyeDetector, faceImage);
         mouthBoxes = step(mouthDetector, faceImage);
         noseBoxes = step(noseDetector, faceImage);
         
         if isempty(rEyeBoxes) || isempty(lEyeBoxes) || isempty(mouthBoxes) || isempty(noseBoxes)
-            fprintf('Didn''t find any features in this face box ...')
+            fprintf('Didn''t find any features in this face box \n')
             continue
         end
         
         % Determine the best features using pictoral structure k-fan
-        [bestIdx, ~, bestPoints] = distTrans(noseBoxes, mouthBoxes, lEyeBoxes, rEyeBoxes);
-%%      
-        fprintf('Finished Detecting Features ... \n');
+        if whichDistTrans == 1
+            [bestIdx, ~, bestPoints] = distTrans(noseBoxes, mouthBoxes, lEyeBoxes, rEyeBoxes);
+            basePoints = [47 59 27 73 68 73 28 36 63 35]; %Base points, picked by hand
+        elseif whichDistTrans == 2;
+            [bestIdx, ~, bestPoints] = distTrans2(noseBoxes, mouthBoxes, lEyeBoxes, rEyeBoxes);
+%             basePoints = [47 59 27 75 68 75 28 36 63 35];
+            basePoints = [324 390 200 485 460 485 211 235 421 226];
+            % basePoints = [47 59 28 36 63 35 27 73 68 73]; %Base points, picked by hand
+        end
+        
 
-        fprintf('Warping Base Image ... \n')
+        fprintf('Done \n');
+
+        fprintf('\tWarping Base Image ... ')
 
         % Pick control points for warping
         ctrlPoints = 1;
         reshapePoints = @(points) [points(1:2:end)' points(2:2:end)']; % Function resizes points into something warping functions can use
-        basePoints = [47 59 27 73 68 73 28 36 63 35]; %Base points, picked by hand
 
         switch ctrlPoints
             case 1 % Use just the four features from above (nose, mouth, leftEye, rightEye)
@@ -91,33 +108,60 @@ for i = 1:numel(images)
                 morphed_mask = imwarp(faceMask, tform, 'OutputView',imref2d(size(faceImage)));
         end
         
-        fprintf('Finished Warping \n')
-        figure(1)
-        clf
-
-        % Plot face sample and control points
-        subplot(1,2,1)
-        subimage(baseImgColor);
-        hold on
-        scatter(basePoints(1:2:end), basePoints(2:2:end), 'c+');
+        fprintf('Done \n');
         
-        % Plot found face and best features
-        subplot(1,2,2)
-        subimage(faceImage);
-        hold on
-        scatter(bestPoints(1:2:end), bestPoints(2:2:end), 'c+');
-        
-        pause
+        if stepThrough == 2
+            figure(1)
+            clf
 
+            % Plot face sample and control points
+            subplot(1,2,1)
+            subimage(baseImgColor);
+            hold on
+            colormap lines
+            scatter(basePoints(1:2:end), basePoints(2:2:end), 25, 1:(length(basePoints)/2));
+
+            % Plot found face and best features
+            subplot(1,2,2)
+            subimage(faceImage);
+            hold on
+            colormap lines
+            scatter(bestPoints(1:2:end), bestPoints(2:2:end), 25, 1:(length(basePoints)/2));
+
+            pause
+        end
+        if strcmpi(folder, 'testset/more')
+            morphed_mask = imresize(morphed_mask, 1/scale);
+            morphed_im = imresize(morphed_im, 1/scale);
+        end
         imageMask = false(size(currentImage(:,:,1)));
         imageMask(xRange, yRange,:) = logical(morphed_mask);
         morphedBlend = zeros(size(currentImage));
         morphedBlend(xRange, yRange,:) = morphed_im;
+        fprintf('\tStarting Pyramid Blend... ')
+        clear morphed_im morphed_mask baseImgColor faceImage xRange yRange
+        
         imageMerged = pyramidBlend(morphedBlend, currentImage, imageMask,6);
-        clf
-        imagesc(imageMerged);
-        axis image
-        pause
+        fprintf('Done \n');
+        
+        if stepThrough == 2
+            figure(1);
+            clf
+            imagesc([currentImage imageMerged]);
+            axis image
+            pause
+        end
         currentImage = imageMerged;
     end
+    if stepThrough == 1
+        figure(1);
+        clf
+        imagesc([currentImage imageMerged]);
+        axis image
+        pause
+    end
+    replacedImages{i} = currentImage;
+    clear currentImage
 end
+
+saveImages('Results/pose', replacedImages);
