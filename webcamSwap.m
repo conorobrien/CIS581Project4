@@ -1,5 +1,5 @@
 clear all
-
+addpath FaceSwapLive
 cam = webcam(1);
 
 % Initialize the feature detectors

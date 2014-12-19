@@ -1,6 +1,9 @@
 function [ imageRecon ] = pyramidBlendLive(im1, im2, mask, levels)
 %PYRAMIDBLUR pyramid blur two pyramid objects using a binary mask
 
+% rewrite this to just do it five times, and allocate different sized
+% images for each level. Will be much faster than it currently is.
+
 gaussian1 = zeros([size(im1) levels], 'like', im1);
 gaussian2 = zeros([size(im2) levels], 'like', im1);
 laplacian1 = zeros([size(im1) levels-1], 'like', im1);
