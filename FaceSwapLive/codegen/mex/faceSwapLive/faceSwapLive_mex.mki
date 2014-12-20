@@ -17,4 +17,4 @@ Arch=maci64
 OMPFLAGS=
 OMPLINKFLAGS=
 EMC_COMPILER=Xcode with Clang
-EMC_CONFIG=optim
+EMC_CONFIG=debug

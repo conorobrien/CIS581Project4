@@ -1,4 +1,4 @@
-function [bestPoints] = featSelect(noseBoxes, mouthBoxes, lEyeBoxes, rEyeBoxes)
+function [bestPoints] = featSelect(noseBoxes, mouthBoxes, lEyeBoxes, rEyeBoxes, basePoints)
 % possible improvements:
 % - use left/right of mouth rather then mouth center
 % - needs speedup, the pointsDist function gets really slow as # features increases
@@ -33,7 +33,8 @@ points = [noseCenter(idxNose(:), :) mouthLeft(idxMouth(:), :) mouthRight(idxMout
 % Points of my test face
 % basePoints = [47 59 47 73 28 36 63 35];
 % basePoints = [47 59 27 77 68 77 28 36 63 35];
-basePoints = [324 390 190 485 460 485 211 235 421 226];
+% basePoints = [324 390 190 485 460 485 211 235 421 226];
+% basePoints = [324 390 190 485 460 475 211 235 421 226]/6;
 
 % k-Fan distances for base face
 baseDist = pointsDist(basePoints);
@@ -62,7 +63,7 @@ else
     mouthLeft = bestMouthC - (bestREye - bestLEye)/(bestREye(1) - bestLEye(1))*(bestMouth(3)/2);
     mouthRight = bestMouthC + (bestREye - bestLEye)/(bestREye(1) - bestLEye(1))*(bestMouth(3)/2);
 
-    if isfinite(mouthLeft) & isfinite(mouthRight)
+    if isfinite(mouthLeft) & isfinite(mouthRight) %#ok<AND2>
         bestPoints(3:4) = mouthLeft;
         bestPoints(5:6) = mouthRight;
     end

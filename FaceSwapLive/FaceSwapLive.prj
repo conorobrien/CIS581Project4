@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.matlabcoder" plugin-version="R2014a_nu">
-  <configuration build-checksum="2830506389" file="/Users/conor/Documents/MATLAB/CIS581/CIS581Project4/FaceSwapLive/FaceSwapLive.prj" location="/Users/conor/Documents/MATLAB/CIS581/CIS581Project4/FaceSwapLive" name="FaceSwapLive" target="target.matlab.coder" target-name="MEX, C, and C++ Code Generation">
+  <configuration build-checksum="666749617" file="/Users/conor/Documents/MATLAB/CIS581/CIS581Project4/FaceSwapLive/FaceSwapLive.prj" location="/Users/conor/Documents/MATLAB/CIS581/CIS581Project4/FaceSwapLive" name="FaceSwapLive" target="target.matlab.coder" target-name="MEX, C, and C++ Code Generation">
     <profile key="profile.mex">
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
@@ -9,23 +9,23 @@
       <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
       <param.SpecifiedBuildFolder />
       <param.SearchPaths />
-      <param.ResponsivenessChecks>true</param.ResponsivenessChecks>
-      <param.ExtrinsicCalls>true</param.ExtrinsicCalls>
-      <param.IntegrityChecks>true</param.IntegrityChecks>
-      <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
-      <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.SyncAlways</param.GlobalDataSyncMethod>
+      <param.ResponsivenessChecks>false</param.ResponsivenessChecks>
+      <param.ExtrinsicCalls>false</param.ExtrinsicCalls>
+      <param.IntegrityChecks>false</param.IntegrityChecks>
+      <param.SaturateOnIntegerOverflow>false</param.SaturateOnIntegerOverflow>
+      <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.NoSync</param.GlobalDataSyncMethod>
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
       <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
       <param.StackUsageMax>200000</param.StackUsageMax>
-      <param.FilePartitionMethod>option.FilePartitionMethod.MapMFileToCFile</param.FilePartitionMethod>
+      <param.FilePartitionMethod>option.FilePartitionMethod.SingleFile</param.FilePartitionMethod>
       <param.GenerateComments>true</param.GenerateComments>
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
       <param.ReservedNameArray />
       <param.EnableScreener>true</param.EnableScreener>
-      <param.EnableDebugging>false</param.EnableDebugging>
+      <param.EnableDebugging>true</param.EnableDebugging>
       <param.GenerateReport>true</param.GenerateReport>
-      <param.LaunchReport>false</param.LaunchReport>
+      <param.LaunchReport>true</param.LaunchReport>
       <param.CustomSourceCode />
       <param.CustomHeaderCode />
       <param.CustomInitializer />
@@ -58,31 +58,18 @@
         <param.BuildFolder />
         <param.SpecifiedBuildFolder />
         <param.SearchPaths />
-        <param.ResponsivenessChecks />
-        <param.ExtrinsicCalls />
-        <param.IntegrityChecks />
-        <param.SaturateOnIntegerOverflow />
-        <param.GlobalDataSyncMethod />
         <param.EnableVariableSizing />
         <param.DynamicMemoryAllocation />
         <param.DynamicMemoryAllocationThreshold />
         <param.StackUsageMax />
-        <param.FilePartitionMethod />
         <param.GenerateComments />
         <param.MATLABSourceComments />
         <param.ReservedNameArray />
         <param.EnableScreener />
-        <param.EnableDebugging />
         <param.GenerateReport />
-        <param.LaunchReport />
-        <param.CustomSourceCode />
-        <param.CustomHeaderCode />
-        <param.CustomInitializer />
-        <param.CustomTerminator />
         <param.CustomInclude />
         <param.CustomSource />
         <param.CustomLibrary />
-        <param.PostCodeGenCommand />
         <param.ProposeFixedPointDataTypes />
         <param.mex.GenCodeOnly />
         <param.ConstantFoldingTimeout />
@@ -151,7 +138,7 @@
       <param.CustomLibrary />
       <param.PostCodeGenCommand />
       <param.TargetLangStandard>C89/C90 (ANSI)</param.TargetLangStandard>
-      <param.CodeReplacementLibrary />
+      <param.CodeReplacementLibrary>None</param.CodeReplacementLibrary>
       <param.DeprecatedCRLFlag>false</param.DeprecatedCRLFlag>
       <param.SameHardware>true</param.SameHardware>
       <param.HardwareVendor.Production>Generic</param.HardwareVendor.Production>
@@ -344,7 +331,7 @@
         <param.UseECoderFeatures />
       </unset>
     </profile>
-    <param.outputfile>${PROJECT_ROOT}/faceSwapLive_mex.mexmaci64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}/faceSwapLiveMEX.mexmaci64</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>false</param.HasECoderFeatures>
     <param.mex.mainhtml>/Users/conor/Documents/MATLAB/CIS581/CIS581Project4/FaceSwapLive/codegen/mex/faceSwapLive/html/index.html</param.mex.mainhtml>
@@ -357,8 +344,8 @@
     <param.AutoInferUseUnboundedSize>false</param.AutoInferUseUnboundedSize>
     <param.AutoInferVariableSizeThreshold>1024</param.AutoInferVariableSizeThreshold>
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
-    <param.AnnotationChecksum>116359674</param.AnnotationChecksum>
-    <param.mex.outputfile>faceSwapLive_mex</param.mex.outputfile>
+    <param.AnnotationChecksum>1783389277</param.AnnotationChecksum>
+    <param.mex.outputfile>faceSwapLiveMEX</param.mex.outputfile>
     <param.grt.outputfile>faceSwapLive</param.grt.outputfile>
     <param.artifact>option.target.artifact.mex</param.artifact>
     <param.FixedPointTypeProposalMode>option.FixedPointTypeProposalMode.ProposeFractionLengths</param.FixedPointTypeProposalMode>
@@ -414,7 +401,6 @@
       <param.AutoInferUseUnboundedSize />
       <param.AutoInferVariableSizeThreshold />
       <param.AutoInferUnboundedSizeThreshold />
-      <param.mex.outputfile />
       <param.grt.outputfile />
       <param.artifact />
       <param.FixedPointTypeProposalMode />
@@ -461,17 +447,17 @@
       <file custom-data-expanded="false" value="${PROJECT_ROOT}/faceSwapLive.m">
         <Inputs fileName="faceSwapLive.m" functionName="faceSwapLive">
           <Input Name="targetImage">
-            <Class>uint8</Class>
+            <Class>double</Class>
             <Size>240 x 427 x 3</Size>
-            <Value>img</Value>
+            <Value />
             <InitialValue />
             <UserDefined>true</UserDefined>
             <Complex>false</Complex>
           </Input>
           <Input Name="swapImage">
-            <Class>uint8</Class>
+            <Class>double</Class>
             <Size>105 x 105 x 3</Size>
-            <Value>swapImage</Value>
+            <Value />
             <InitialValue />
             <UserDefined>true</UserDefined>
             <Complex>false</Complex>
@@ -489,7 +475,7 @@
     <fileset.testbench />
     <fileset.package />
     <build-deliverables>
-      <file location="/Users/conor/Documents/MATLAB/CIS581/CIS581Project4/FaceSwapLive" name="faceSwapLive_mex.mexmaci64" optional="false">/Users/conor/Documents/MATLAB/CIS581/CIS581Project4/FaceSwapLive/faceSwapLive_mex.mexmaci64</file>
+      <file location="/Users/conor/Documents/MATLAB/CIS581/CIS581Project4/FaceSwapLive" name="faceSwapLiveMEX.mexmaci64" optional="false">/Users/conor/Documents/MATLAB/CIS581/CIS581Project4/FaceSwapLive/faceSwapLiveMEX.mexmaci64</file>
     </build-deliverables>
     <workflow />
     <matlab>

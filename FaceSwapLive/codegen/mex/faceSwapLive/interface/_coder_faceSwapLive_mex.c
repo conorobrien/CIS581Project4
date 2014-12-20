@@ -7,9 +7,7 @@
 
 /* Include files */
 #include "mex.h"
-#include "_coder_faceSwapLive_api.h"
-#include "faceSwapLive_initialize.h"
-#include "faceSwapLive_terminate.h"
+#include "faceSwapLive.h"
 
 /* Function Declarations */
 static void faceSwapLive_mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]);

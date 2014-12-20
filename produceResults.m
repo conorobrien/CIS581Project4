@@ -8,34 +8,24 @@ detectors.mouthDetector = vision.CascadeObjectDetector('mouth');
 detectors.noseDetector = vision.CascadeObjectDetector('nose');
 
 %% Load Images from folder
-folder = 'TestSet/blending';
+folder = 'TestSet/pose';
 images = loadImages(folder);
 replacedImages = images;
 %% Load base image and mask
 swapImage = im2double(imread('SwapSet/ConorFaceHires.jpg'));
 swapMask = imread('SwapSet/ConorFaceHiresMask.jpg');
 swapMask = ~logical(swapMask(:,:,1));
-
-try
-close(99)
-catch
-    figure(99);clf;
-end
+colorMask = imread('SwapSet/ConorFaceHiresColorMask.jpg');
+colorMask = ~logical(colorMask(:,:,1));
 
 swappedImages = images;
 for i = 1:numel(images)
-    
         if strcmpi(folder, 'TestSet/more')
-            swappedImages{i} = faceSwap(images{i}, swapImage, swapMask, detectors, 'lores');
+            swappedImages{i} = faceSwap(images{i}, swapImage, swapMask,colorMask, detectors, 'lores');
         else
-            swappedImages{i} = faceSwap(images{i}, swapImage, swapMask, detectors);
-
+            swappedImages{i} = faceSwap(images{i}, swapImage, swapMask,colorMask, detectors);
         end
-        figure(99);
-        imagesc(swappedImages{i})
-        axis image;
-        pause
 end
 
-% saveImages(['Results/' folder], swappedImages)
+saveImages(['Results/' folder], swappedImages)
 

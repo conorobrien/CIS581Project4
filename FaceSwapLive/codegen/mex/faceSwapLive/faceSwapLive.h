@@ -20,15 +20,18 @@
 #include "rtwtypes.h"
 #include "faceSwapLive_types.h"
 
+/* Variable Declarations */
+extern faceSwapLiveStackData *faceSwapLiveStackDataLocal;
+
 /* Function Declarations */
-extern void faceDetector_not_empty_init(void);
-extern void faceSwapLive(faceSwapLiveStackData *SD, const emlrtStack *sp,
-  uint8_T targetImage[307440], const uint8_T swapImage[33075], const boolean_T
-  swapMask[11025], uint8_T swappedImage[307440]);
-extern void lEyeDetector_not_empty_init(void);
-extern void mouthDetector_not_empty_init(void);
-extern void noseDetector_not_empty_init(void);
-extern void rEyeDetector_not_empty_init(void);
+extern void faceSwapLive(faceSwapLiveStackData *SD, real_T targetImage[307440],
+  const real_T swapImage[33075], const boolean_T swapMask[11025], real_T
+  swappedImage[307440]);
+extern void faceSwapLive_api(faceSwapLiveStackData *SD, const mxArray *prhs[3],
+  const mxArray *plhs[1]);
+extern void faceSwapLive_atexit(void);
+extern void faceSwapLive_initialize(emlrtContext *aContext);
+extern void faceSwapLive_terminate(void);
 
 #endif
 

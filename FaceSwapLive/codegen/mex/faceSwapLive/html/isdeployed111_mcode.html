@@ -1,0 +1,16 @@
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="50,1" id="srcline1"> 1</a></span><span class="line"><span class="keyword">function</span> <span class="var type1" id="S2T1U3">p</span> = isdeployed</span></span>
+<span class="srcline"><span class="lineno"><a href="50,2" id="srcline2"> 2</a></span><span class="line"><span class="comment">%MATLAB Code Generation Library Function</span></span></span>
+<span class="srcline"><span class="lineno"><a href="50,3" id="srcline3"> 3</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="50,4" id="srcline4"> 4</a></span><span class="line"><span class="comment">%   Limitations:</span></span></span>
+<span class="srcline"><span class="lineno"><a href="50,5" id="srcline5"> 5</a></span><span class="line"><span class="comment">%   The function can potentially return true only when coder.target is 'mex'</span></span></span>
+<span class="srcline"><span class="lineno"><a href="50,6" id="srcline6"> 6</a></span><span class="line"><span class="comment">%   or 'sfun'.  For any other target it always returns FALSE.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="50,7" id="srcline7"> 7</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="50,8" id="srcline8"> 8</a></span><span class="line"><span class="comment">%   Copyright 1984-2010 The MathWorks, Inc.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="50,9" id="srcline9"> 9</a></span><span class="line"><span class="comment">%#codegen</span></span></span>
+<span class="srcline"><span class="lineno"><a href="50,10" id="srcline10">10</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="50,11" id="srcline11">11</a></span><span class="line"><span class="mxinfo " id="T1:U2"><span class="var type1" id="S2T1U8">p</span> = <span class="mxinfo " id="T1:U4">false</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="50,12" id="srcline12">12</a></span><span class="line"><span class="keyword">if</span> strcmp(coder.target,<span class="string">'mex'</span>) || strcmp(coder.target,<span class="string">'sfun'</span>)</span></span>
+<span class="srcline"><span class="lineno"><a href="50,13" id="srcline13">13</a></span><span class="line">    <span class="mxinfo " id="T1:U5"><span class="var type1" id="S2T1U28">p</span> = <span class="mxinfo " id="T12:U7"><span class="message warning" id="M1F111C"><span class="extrinsicFcn" id="F2516N9:B30">feval</span>(<span class="mxinfo " id="T76:U8"><span class="string">'isdeployed'</span></span>)</span></span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="50,14" id="srcline14">14</a></span><span class="line"><span class="keyword"><span class="keyword">end</span></span></span></span>
+</pre>

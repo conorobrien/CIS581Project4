@@ -1,15 +1,23 @@
-function swappedImage = faceSwap(targetImage, swapImage, swapMask, detectors, varargin)
+function swappedImage = faceSwap(targetImage, swapImage, swapMask, colorMask, detectors, varargin)
 
-    if ~isempty(varargin) && strcmpi(varargin{1}, '-v')
+    verb = ~isempty(varargin) && any(strcmp('-v',varargin));
+
+    if ~isempty(varargin) && any(strcmp('-v',varargin))
 		verb = true;
 	else
 		verb = false;
     end
     
-    if ~isempty(varargin) && strcmpi(varargin{1}, 'lores')
+    if ~isempty(varargin) && any(strcmp('lores',varargin))
 		lores = true;
 	else
 		lores = false;
+    end
+    
+    if ~isempty(varargin) && any(strcmp('webcam',varargin))
+		webcam = true;
+	else
+		webcam = false;
     end
 
 	if verb; fprintf('Detecting faces in image ...'); end;
@@ -40,8 +48,14 @@ function swappedImage = faceSwap(targetImage, swapImage, swapMask, detectors, va
         end
         
         % Determine the best features using pictoral structure k-fan
-        bestPoints = featSelect(noseBoxes, mouthBoxes, lEyeBoxes, rEyeBoxes);
-        basePoints = [324 390 190 485 460 485 211 235 421 226];
+        
+        if webcam %scales basepoints for smaller webcam images
+            basePoints = [324 390 190 485 460 475 211 235 421 226]/6;
+        else
+            basePoints = [324 390 190 485 460 475 211 235 421 226];
+        end
+        
+        bestPoints = featSelect(noseBoxes, mouthBoxes, lEyeBoxes, rEyeBoxes, basePoints);
         
         if isempty(bestPoints)
             if verb;fprintf('Face wasn''t good enough \n');end
@@ -56,10 +70,12 @@ function swappedImage = faceSwap(targetImage, swapImage, swapMask, detectors, va
         reshapePoints = @(points) [points(1:2:end)' points(2:2:end)']; % Function resizes points into something warping functions can use
         swapPts = reshapePoints(basePoints);
         targetPts = reshapePoints(bestPoints);
-
+        
         tform = fitgeotrans(swapPts, targetPts, 'projective');
         warpedMask = imwarp(swapMask, tform, 'OutputView',imref2d(size(faceImage)));
-        swapImageColor = (swapImage +imhistmatch(swapImage, faceImage,50))/2;
+%         swapImageColor = (swapImage +imhistmatch(swapImage, faceImage,50))/2;
+        swapImageColor = swapImage;
+        swapImageColor(repmat(colorMask,1,1,3)) = imhistmatch(swapImageColor(repmat(colorMask,1,1,3)), faceImage(repmat(warpedMask,1,1,3)), 150);
         warpedImage = imwarp(swapImageColor, tform, 'OutputView',imref2d(size(faceImage)));
         
         if lores
@@ -85,16 +101,16 @@ function swappedImage = faceSwap(targetImage, swapImage, swapMask, detectors, va
             hold on
             colormap lines
             scatter(bestPoints(1:2:end), bestPoints(2:2:end), 25, 1:(length(basePoints)/2));
+            disp('Paused...')
             pause
         end
         
         imageMask = false(size(targetImage(:,:,1)));
-        imageMask(xRange, yRange,:) = logical(warpedMask);
+        imageMask(xRange, yRange) = logical(warpedMask);
         
 %         morphedBlend = zeros(size(targetImage));
         morphedBlend = targetImage;
         morphedBlend(xRange, yRange,:) = warpedImage;
-        morphedBlend(morphedBlend == 0) = mean(morphedBlend(:));
 %         morphedBlend(xRange, yRange, :) = imhistmatch(morphedBlend(xRange, yRange, :), targetImage(xRange, yRange, :),1000);
         
         if verb;fprintf('\tStarting Pyramid Blend... ');end;
@@ -105,17 +121,10 @@ function swappedImage = faceSwap(targetImage, swapImage, swapMask, detectors, va
             clf
             imagesc([targetImage swappedImage]);
             axis image
+            disp('Paused...')
             pause
         end
-%         swappedImage = imhistmatch(swappedImage, targetImage, 100);
         targetImage = swappedImage;
-    end
-    if verb
-        figure(1);
-        clf
-        imagesc([targetImage swappedImage]);
-        axis image
-        pause
     end
 
     if ~exist('swappedImage','var')

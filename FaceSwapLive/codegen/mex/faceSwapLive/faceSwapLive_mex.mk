@@ -7,56 +7,15 @@ include faceSwapLive_mex.mki
 
 
 SRC_FILES =  \
-	faceSwapLive_mexutil.c \
-	faceSwapLive_data.c \
-	faceSwapLive_initialize.c \
-	faceSwapLive_terminate.c \
 	faceSwapLive.c \
-	rdivide.c \
-	CascadeObjectDetector.c \
-	SystemCore.c \
-	validateattributes.c \
-	eml_int_forloop_overflow_check.c \
-	any.c \
-	isequal.c \
-	isfinite.c \
-	abs.c \
-	rgb2gray.c \
-	inv.c \
-	norm.c \
-	eml_warning.c \
-	featSelectLive.c \
-	boxCenter.c \
-	repmat.c \
-	pointsDist.c \
-	bsxfun.c \
-	sum.c \
-	sqrt.c \
-	eml_error.c \
-	round.c \
-	reshapePoints.c \
-	fitgeotrans.c \
-	normalizeControlPoints.c \
-	mldivide.c \
-	projective2d.c \
-	det.c \
-	imref2d.c \
-	imwarp.c \
-	meshgrid.c \
-	padarray.c \
-	pyramidBlendLive.c \
-	imfilter.c \
-	mod.c \
-	_coder_faceSwapLive_api.c \
-	faceSwapLive_emxutil.c \
 	_coder_faceSwapLive_mex.c \
 	_coder_faceSwapLive_info.c
 
-MEX_FILE_NAME_WO_EXT = faceSwapLive_mex
+MEX_FILE_NAME_WO_EXT = faceSwapLiveMEX
 MEX_FILE_NAME = $(MEX_FILE_NAME_WO_EXT).mexmaci64
 TARGET = $(MEX_FILE_NAME)
 
-BlockModules_LIBS = "$(MATLAB_ROOT)/bin/maci64/libmwremaptbb.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwipp.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwcascadeClassifier.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwimfilter.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwnhood.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwippfilter.dylib" 
+BlockModules_LIBS = "$(MATLAB_ROOT)/bin/maci64/libmwremaptbb.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwipp.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwcascadeClassifier.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwgrayto8.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwimfilter.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwnhood.dylib" "$(MATLAB_ROOT)/bin/maci64/libmwippfilter.dylib" 
 SYS_LIBS = $(BlockModules_LIBS) 
 
 

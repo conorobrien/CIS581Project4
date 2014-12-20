@@ -26,5 +26,5 @@ echo "Arch=$Arch" >> faceSwapLive_mex.mki
 echo OMPFLAGS= >> faceSwapLive_mex.mki
 echo OMPLINKFLAGS= >> faceSwapLive_mex.mki
 echo "EMC_COMPILER=Xcode with Clang" >> faceSwapLive_mex.mki
-echo "EMC_CONFIG=optim" >> faceSwapLive_mex.mki
+echo "EMC_CONFIG=debug" >> faceSwapLive_mex.mki
 "/Applications/MATLAB_R2014b.app/bin/maci64/gmake" -B -f faceSwapLive_mex.mk
