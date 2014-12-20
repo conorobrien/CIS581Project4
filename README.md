@@ -1,25 +1,17 @@
 CIS581Project4
 ==============
 
-## Toolboxes
+## Usage
 
-#### Face-release1.0-basic  
-Website: http://www.ics.uci.edu/~xzhu/face  
-Status: Compiled and demo working, slow but lots of face points  
-Install Instuctions: Run compile.m, demo.m compiles then runs test script  
+#### webcamSwap 
+webcamSwap() -runs for 60s using face swap with color correction  
+webcamSwap(n) -runs for n seconds  
+webcamSwap('mex') -runs using compiled coder .mex, can also give it a number to run for n seconds  
+-Before using 'mex' option run compile.m in /FaceSwapLive to run the matlab coder, this doesn't always work though since coder is tempermental.
 
-#### Opencv
-Website: http://opencv.org/  
-Main Git Repo: https://github.com/Itseez/opencv  
-Extras Git Repo: https://github.com/Itseez/opencv_contrib  
-Status: Compiled but not tested  
-Install Instuctions: On githubs, I had to move the matlab module into the opencv modules folder rather than using the opencv_contrib instructions  
+#### movieSwap
+Just run the script, writes a swapped image to Results/faceswap.avi
 
-#### VLFeat
-Website: http://www.vlfeat.org/  
-Status: Precompiled, test worked  
-Install Instructions: http://www.vlfeat.org/install-matlab.html, use run('vlfeat-0.9.19/toolbox/vl_setup') to add to path  
+#### produceResults
+Writes swapped images to Results/, change variable folder on ln 11 to change where images are loaded from.
 
-#### Flandmard
-Website: http://cmp.felk.cvut.cz/~uricamic/flandmark/
-Status: Going to try this next, picks out corners of eyes and mouth

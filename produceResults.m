@@ -11,6 +11,7 @@ detectors.noseDetector = vision.CascadeObjectDetector('nose');
 folder = 'TestSet/pose';
 images = loadImages(folder);
 replacedImages = images;
+
 %% Load base image and mask
 swapImage = im2double(imread('SwapSet/ConorFaceHires.jpg'));
 swapMask = imread('SwapSet/ConorFaceHiresMask.jpg');
@@ -21,9 +22,9 @@ colorMask = ~logical(colorMask(:,:,1));
 swappedImages = images;
 for i = 1:numel(images)
         if strcmpi(folder, 'TestSet/more')
-            swappedImages{i} = faceSwap(images{i}, swapImage, swapMask,colorMask, detectors, 'lores');
+            swappedImages{i} = faceSwap(images{i}, swapImage, swapMask, colorMask, detectors, 'lores');
         else
-            swappedImages{i} = faceSwap(images{i}, swapImage, swapMask,colorMask, detectors);
+            swappedImages{i} = faceSwap(images{i}, swapImage, swapMask, colorMask, detectors);
         end
 end
 
