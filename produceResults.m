@@ -1,5 +1,6 @@
 clearvars;
 addpath FaceSwap
+
 %% Initialize the feature detectors
 detectors.faceDetector = vision.CascadeObjectDetector('FrontalFaceCART');
 detectors.lEyeDetector = vision.CascadeObjectDetector('lefteye');
